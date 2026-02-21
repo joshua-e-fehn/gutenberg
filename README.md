@@ -76,3 +76,11 @@ The project is structured as a proper Python package:
 - `pyproject.toml` - Project configuration and dependencies
 
 The CLI uses Typer for command-line interface management and integrates directly with the Typer applications from the individual scripts to provide a unified interface.
+
+## AWS CDK Infrastructure
+
+All AWS infrastructure code lives in:
+
+- `aws/`
+
+Use this as the single source of truth for infrastructure changes and deployments.
