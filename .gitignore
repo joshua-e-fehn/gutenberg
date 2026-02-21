@@ -172,3 +172,32 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+
+# Custom
+books/
+audioResults/
+.DS_Store
+scraper_daily.log
+
+# pixi environments
+.pixi
+*.egg-info
+
+# Node / JavaScript
+**/node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# CDK / serverless build output
+cdk.out/
+.cdk.staging/
+**/.serverless/
+**/.aws-sam/
+
+# Build artifacts
+coverage/
+*.tsbuildinfo
+dist/
+build/

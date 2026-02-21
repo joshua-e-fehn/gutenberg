@@ -1,0 +1,47 @@
+[project]
+name = "gutenberg"
+version = "0.1.0"
+description = "Turn open source gutenberg text automatically into audiobooks and upload them on various channels (YouTube, Spotify) etc."
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "beautifulsoup4", "ollama>=0.5.1,<0.6", "typer>=0.16.0", "requests>=2.25.0", "python-dotenv>=0.19.0"
+]
+
+[project.scripts]
+gutenberg = "cli:app"
+
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["scripts*"]
+exclude = ["books*", "test_output*", "textSources*", "audioResults*", "book_chapters*", ".venv*"]
+
+[tool.setuptools]
+py-modules = ["cli"]
+
+[tool.pixi.workspace]
+channels = ["conda-forge"]
+platforms = ["osx-arm64"]
+
+[tool.pixi.pypi-dependencies]
+gutenberg = { path = ".", editable = true }
+TTS = "*"
+
+[tool.pixi.tasks]
+dev-install = "pip install -e ."
+gutenberg = { cmd = "gutenberg", depends-on = ["dev-install"] }
+test-cli = { cmd = "gutenberg --help", depends-on = ["dev-install"] }
+test-create-chapters = { cmd = "gutenberg create-chapters --help", depends-on = ["dev-install"] }
+test-format-chapters = { cmd = "gutenberg format-chapters --help", depends-on = ["dev-install"] }
+test-merge-audio-chapters = { cmd = "gutenberg merge-audio-chapters --help", depends-on = ["dev-install"] }
+
+[tool.pixi.dependencies]
+python = ">=3.11,<3.12"
+beautifulsoup4 = ">=4.13.4,<5"
+typer = ">=0.16.0,<0.17"
+ollama = ">=0.9.6,<0.10"
+google-genai = ">=1.28.0,<2"
