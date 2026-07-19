@@ -201,3 +201,5 @@ coverage/
 *.tsbuildinfo
 dist/
 build/
+.worktrees/
+.vibe/sources/
