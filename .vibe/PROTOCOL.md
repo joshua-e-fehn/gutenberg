@@ -107,3 +107,21 @@ The goal: another agent on another machine can run `vibe resume <branch>`, read
 mechanism for state between machines — **not a review request**. When the work
 is actually finished, `vibe ship` runs the structure gate and the size check,
 strips the handover markers, and promotes the same PR to reviewable in place.
+
+## Supervised requests
+
+Your branch may be part of a larger **request** tracked in
+`.vibe/tasks/<task-id>.json`. If it is, two things follow:
+
+- **Finishing your branch is not finishing the request.** Going idle, opening a
+  PR, or getting it merged does not mean the thing the human asked for is done —
+  merged is not deployed, and deployed is not working. Do not describe the
+  request as complete; report what *your* branch did and stop.
+- **Say when you are waiting.** If you kick off a long detached job (a build, a
+  deploy, a migration), tell the human the PID and its log file so it can be
+  registered with `vibe supervise watch-pid`. While a registered job is healthy,
+  an idle agent is correctly read as *waiting*, not finished — but only if the
+  job was registered.
+
+Only a human marks a request verified, and only with evidence. Never claim it
+for them.
